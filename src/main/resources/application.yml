@@ -1,9 +1,9 @@
 #spring.application.name=agile-app
 spring:
     datasource:
-        url: jdbc:mysql://db:3306/agile_db?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC&characterEncoding=UTF-8
-        username: root
-        password: root
+        url: jdbc:mysql://${DB_HOST:localhost}:${DB_PORT:3308}/${DB_NAME:agile_db}?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC&characterEncoding=UTF-8
+        username: ${DB_USER:root}
+        password: ${DB_PASSWORD:root}
 #        driver-class-name: com.mysql.cj.jdbc.Driver
     jpa:
         hibernate:
