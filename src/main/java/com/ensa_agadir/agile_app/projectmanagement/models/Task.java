@@ -1,6 +1,5 @@
 package com.ensa_agadir.agile_app.projectmanagement.models;
 
-import com.ensa_agadir.agile_app.productmanagement.models.UserStory;
 import com.ensa_agadir.agile_app.shared.BaseEntity;
 import com.ensa_agadir.agile_app.shared.DurationConverter;
 import jakarta.persistence.*;
@@ -19,6 +18,7 @@ public class Task extends BaseEntity {
 
     @Column(nullable = false)
     private String titre;
+
     private String description;
 
     @Enumerated(EnumType.STRING)
@@ -32,8 +32,18 @@ public class Task extends BaseEntity {
     @Column(name = "temps_reel")
     private Duration tempsReel;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_story_id", nullable = false)
-    private UserStory userStory;
+    // REFERENCE EXTERNE : ID de la UserStory (Domaine 2)
+    @Column(name = "user_story_id", nullable = false)
+    private Long userStoryId;
 
+    // REFERENCE EXTERNE : ID du Membre qui a pris la tâche (Domaine 1 ou
+    // SprintMember)
+    // On peut lier soit au User global, soit au SprintMember. Ici, l'ID User est
+    // plus flexible.
+    @Column(name = "assignee_user_id")
+    private Long assigneeUserId;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "sprint_backlog_id", nullable = false)
+    private SprintBacklog sprintBacklog;
 }
