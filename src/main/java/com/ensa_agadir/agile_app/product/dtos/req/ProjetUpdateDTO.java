@@ -1,18 +1,17 @@
-package com.ensa_agadir.agile_app.product.dtos;
+package com.ensa_agadir.agile_app.product.dtos.req;
 
 import com.ensa_agadir.agile_app.product.models.StatusDeProjet;
 import com.ensa_agadir.agile_app.product.models.VisibiliteEnum;
+import lombok.Builder;
 
-import java.util.Date;
+import java.time.LocalDate;
 
-public record ProjetRequestDTO(
+@Builder
+public record ProjetUpdateDTO(
         String nomProjet,
         String description,
-        Date dateDebut,
-        Date dateFinPrevue,
-
+        LocalDate dateFinPrevue,
         VisibiliteEnum visibiliteDuProjet,
-        StatusDeProjet statusDeProjet,
-        int createurId
+        StatusDeProjet statusDeProjet
 ) {
 }

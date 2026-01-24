@@ -1,9 +1,6 @@
 package com.ensa_agadir.agile_app.user.dtos.request;
 
-import jakarta.validation.constraints.NotNull;
-
-public record UserCreateRequestDTO(
-        @NotNull
+public record UserRegistrationDTO(
         String nom,
         String prenom,
         String email,
