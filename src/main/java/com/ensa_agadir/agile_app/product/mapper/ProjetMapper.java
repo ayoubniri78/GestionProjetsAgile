@@ -1,12 +1,13 @@
 package com.ensa_agadir.agile_app.product.mapper;
 
-import com.ensa_agadir.agile_app.product.dtos.ProjetRequestDTO;
-import com.ensa_agadir.agile_app.product.dtos.ProjetResponseDTO;
+import com.ensa_agadir.agile_app.product.dtos.req.ProjetRequestDTO;
+import com.ensa_agadir.agile_app.product.dtos.req.ProjetUpdateDTO;
+import com.ensa_agadir.agile_app.product.dtos.resp.ProjetResponseDTO;
 import com.ensa_agadir.agile_app.product.models.Projet;
 import com.ensa_agadir.agile_app.user.models.RoleDansProjet;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.Named;
+import org.mapstruct.*;
+
+import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface ProjetMapper {
@@ -14,12 +15,22 @@ public interface ProjetMapper {
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "membreProjets", ignore = true)
     @Mapping(target = "productBacklog", ignore = true)
+    @Mapping(target = "dateDebut", defaultExpression = "java(java.time.LocalDate.now())")
     Projet toEntity(ProjetRequestDTO dto);
 
-    @Mapping(target = "productOwnerId", source = "projet", qualifiedByName = "extractProductOwnerId")
-    @Mapping(target = "productOwnerName", source = "projet", qualifiedByName = "extractProductOwnerName")
-    @Mapping(target = "productOwnerEmail", source = "projet", qualifiedByName = "extractProductOwnerEmail")
+    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "dateDebut", ignore = true)
+    @Mapping(target = "membreProjets", ignore = true)
+    @Mapping(target = "productBacklog", ignore = true)
+    void updateEntity(ProjetUpdateDTO dto, @MappingTarget Projet projet);
+//
+//    @Mapping(target = "productOwnerId", source = "projet", qualifiedByName = "extractProductOwnerId")
+//    @Mapping(target = "productOwnerName", source = "projet", qualifiedByName = "extractProductOwnerName")
+//    @Mapping(target = "productOwnerEmail", source = "projet", qualifiedByName = "extractProductOwnerEmail")
+
     ProjetResponseDTO toResponseDto(Projet projet);
+
 
     @Named("extractProductOwnerId")
     default Integer extractProductOwnerId(Projet projet) {
@@ -50,4 +61,7 @@ public interface ProjetMapper {
                 .map(m -> m.getUtilisateur().getEmail())
                 .orElse(null);
     }
+
+
+    List<ProjetResponseDTO> toResponseDtoList(List<Projet> projets);
 }

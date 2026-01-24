@@ -1,8 +1,8 @@
 package com.ensa_agadir.agile_app.product.service;
 
-import com.ensa_agadir.agile_app.product.dtos.ProjetRequestDTO;
-import com.ensa_agadir.agile_app.product.dtos.ProjetResponseDTO;
-import com.ensa_agadir.agile_app.product.dtos.ProjetUpdateDTO;
+import com.ensa_agadir.agile_app.product.dtos.req.ProjetRequestDTO;
+import com.ensa_agadir.agile_app.product.dtos.req.ProjetUpdateDTO;
+import com.ensa_agadir.agile_app.product.dtos.resp.ProjetResponseDTO;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -16,9 +16,8 @@ public interface GestionProjet {
     List<ProjetResponseDTO> getProjetsByUtilisateur(Integer utilisateurId);
     ProjetResponseDTO mettreAJourProjet(Integer projetId, ProjetUpdateDTO updateDTO);
 
-    ProjetResponseDTO mettreAJourProjet(Integer projetId, ProjetUpdateDTO updateDTO);
 
     void archiverProjet(Integer projetId);
     void supprimerProjet(Integer projetId);
-    boolean hasSprintActif(Integer projetId);
+
 }
