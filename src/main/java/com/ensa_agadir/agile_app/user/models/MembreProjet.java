@@ -7,6 +7,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
+import java.util.Date;
+
 @Entity
 @Data
 @Builder
@@ -25,5 +28,12 @@ public class MembreProjet {
    @MapsId("projetId")
    @JoinColumn(name = "projet_id")
    private Projet projet;
+
+   @Enumerated(EnumType.STRING)
+   @Column
+   private RoleDansProjet roleDansProjet;
+
+   @Column
+   private LocalDate dateAjout;
 
 }

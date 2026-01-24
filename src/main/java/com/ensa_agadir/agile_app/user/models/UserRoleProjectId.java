@@ -15,9 +15,8 @@ import java.io.Serializable;
 @AllArgsConstructor
 @EqualsAndHashCode
 public class UserRoleProjectId implements Serializable {
-    @Column(name = "user_id")
+
     private Integer userId;
 
-    @Column(name = "projet_id")
     private Integer projetId;
 }

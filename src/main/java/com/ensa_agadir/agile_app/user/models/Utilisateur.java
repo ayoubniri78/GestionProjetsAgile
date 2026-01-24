@@ -1,13 +1,15 @@
 package com.ensa_agadir.agile_app.user.models;
 
 import com.ensa_agadir.agile_app.product.models.Projet;
+import com.ensa_agadir.agile_app.shared.BaseEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.sql.Date;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -15,7 +17,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Utilisateur {
+public class Utilisateur  {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,10 +36,11 @@ public class Utilisateur {
     private String motDePasse;
 
     @Column
-    private Date dateDeCreation;
+    private LocalDate dateDeCreation;
 
     @OneToMany(mappedBy = "utilisateur")
     private List<MembreProjet> membreProjets;
+
 
 }
 
